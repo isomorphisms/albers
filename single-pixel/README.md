@@ -10,7 +10,7 @@ The source color is **sRGB `#CC6633` = (204, 102, 51)**. The SVG only enlarges t
 
 There is no single meaningful “ChatGPT color depth” exposed to us: the app, compositor, display and screenshot path can differ. For this experiment the source state is therefore fixed explicitly to ordinary **24-bit sRGB: 8 bits of red, 8 bits of green, 8 bits of blue, no alpha**. That gives a finite source set of `256^3` RGB states and matches a conservative web/GitHub image representation.
 
-CIELAB is not the display encoding. It is a coordinate system we map the sRGB value into so that local distances are at least approximately perceptual. Here the assumptions are standard sRGB primaries/transfer curve and D65 reference white.
+CIELAB is not the display encoding. It is a coordinate system we map the sRGB value into so that color differences can be discussed in approximately perceptual coordinates. Here the assumptions are standard sRGB primaries/transfer curve and D65 reference white.
 
 For `#CC6633`, the conversion gives approximately:
 
@@ -22,39 +22,57 @@ So the same pixel can be regarded as the point
 
 `(204, 102, 51)_RGB8 -> (54.6400, 36.9064, 46.1234)_Lab`.
 
-## The first deformation space
+## A perceptible deformation shell
 
-The Lab coordinates are continuous, but our actual RGB8 source is a lattice. The smallest available source deformations away from this pixel are therefore one-code changes such as `(R+1)`, `(G-1)`, and so on.
+The first Jacobian experiment used tiny RGB-code perturbations. Keep that as a local diagnostic, but it should not define the main deformation experiment. A one-code RGB move is often below useful human discrimination, and CIELAB already supplies a nonlinear global coordinate map in which we can make substantially larger comparisons directly.
 
-Mapping those six immediate neighbors into CIELAB gives:
+The obvious continuous model around one Lab point is a sphere. We cannot represent a whole sphere, and the exactly symmetric unit face/body diagonals require `sqrt(2)` and `sqrt(3)`, neither of which has a finite binary representation.
 
-| RGB8 move | change in `(L*, a*, b*)` | `Delta E*ab` |
-| --- | --- | ---: |
-| `R - 1` | `(-0.1472, -0.3964, -0.1990)` | `0.4674` |
-| `R + 1` | `(+0.1476, +0.3954, +0.1993)` | `0.4667` |
-| `G - 1` | `(-0.2043, +0.5128, -0.2127)` | `0.5915` |
-| `G + 1` | `(+0.2056, -0.5146, +0.2137)` | `0.5940` |
-| `B - 1` | `(-0.0091, -0.0428, +0.4789)` | `0.4809` |
-| `B + 1` | `(+0.0093, +0.0437, -0.4827)` | `0.4848` |
+Instead choose one sphere whose radius and sampled coordinates are all **exact binary fractions**.
 
-For the Jacobian experiment, use a centered radius of **4 RGB codes** rather than 1:
+Use
+
+`r = 145/16 = 9.0625` Lab units.
+
+Three canonical vectors lie exactly on this same sphere:
+
+```text
+axis       (145,   0,  0) / 16 = (9.0625, 0,      0)
+face-like  (100, 105,  0) / 16 = (6.25,   6.5625, 0)
+body-like  ( 80,  84, 87) / 16 = (5,      5.25,   5.4375)
+```
+
+The equal-radius identities are exact integers:
+
+```text
+100^2 + 105^2             = 145^2
+ 80^2 +  84^2 + 87^2      = 145^2
+```
+
+Therefore no square root is needed to store or verify these displacements. All coordinates are multiples of `1/16`, so they are exact in binary32, and every vector has exact Euclidean CIELAB length `9.0625`.
+
+The face-like vector is close to the symmetric `(1,1,0)` direction without approximating `1/sqrt(2)`. The body-like vector is close to `(1,1,1)` without approximating `1/sqrt(3)`.
+
+Permutations and sign changes give a useful finite sampling of the sphere:
+
+- axis orbit: 6 points
+- face-like orbit: 24 points
+- body-like orbit: 48 points
+- total: **78 deformation directions on one exact-radius shell**
+
+That gives us something much closer to the deformation picture we actually care about: substantial changes in many directions around the color, rather than microscopic axis derivatives.
+
+The shell is a CIELAB `Delta E*ab` sphere. CIELAB is only approximately perceptually uniform, so equal radius does not mean equal perceived difference everywhere. That nonuniformity is part of the experiment rather than something we should erase by pretending the local Jacobian is the whole geometry.
+
+When shell points are rendered, the next boundary is explicit: `Lab -> XYZ/D65 -> sRGB -> RGB8`, with an sRGB-gamut check before quantization. The geometric Lab displacement and the final displayable RGB8 swatch should remain separately recorded.
+
+## Local Jacobian diagnostic
+
+[`lab_jacobian_h4_thumb.S`](lab_jacobian_h4_thumb.S) remains as a diagnostic of the local `RGB8 -> Lab` map. It uses the centered stencil
 
 `J[:,i] = (Lab(x + 4 e_i) - Lab(x - 4 e_i)) / 8`.
 
-The denominator is therefore exactly `8`, so its reciprocal `1/8 = 0.125` is exact in binary32. At `#CC6633` this gives approximately
-
-```text
-             dR       dG       dB
- dL*       0.1474   0.2049   0.0092
- da*       0.3959  -0.5135   0.0433
- db*       0.1991   0.2132  -0.4804
-```
-
-These three probes are along the coordinate axes `(1,0,0)`, `(0,1,0)`, `(0,0,1)`, whose lengths are already 1. Therefore there is no `1/sqrt(2)` normalization in this Jacobian. A diagonal direction such as `(1,1,0)` has length `sqrt(2)` and must carry that normalization when we test it.
-
-This is already more useful than saying that the pixel lives in a generic three-dimensional color ball. At this point the available source moves are discrete, anisotropic after the Lab map, and bounded by the sRGB gamut. Later we can ask what identifications perception introduces, and whether the relevant local neighborhoods change when another color is placed next to this one.
-
-`Delta E*ab` here is just Euclidean distance in CIELAB. CIELAB is only approximately perceptually uniform, so this is a first coordinate model, not a claim that equal Lab distances always look equally different.
+The denominator is exactly `8`, so `1/8 = 0.125` is exact in binary32. This is useful for measuring local anisotropy, but it is no longer the primary deformation sampling scheme.
 
 ## ARM/Thumb implementation
 
@@ -64,7 +82,9 @@ The numerical experiment is kept in **assembly rather than Idriç**.
 
 `sRGB8 -> linear RGB -> XYZ/D65 -> CIELAB`.
 
-[`lab_jacobian_h4_thumb.S`](lab_jacobian_h4_thumb.S) computes the centered `h=4` Jacobian by calling that conversion at the six required RGB lattice points and multiplying each difference by the exactly represented float32 value `0.125`.
+[`lab_shell_r9_0625_thumb.S`](lab_shell_r9_0625_thumb.S) records the exact-binary deformation shell and applies its three canonical generators using Thumb/VFP scalar additions. Signed coordinate permutations are intentionally kept as a separate combinatorial layer.
+
+[`lab_jacobian_h4_thumb.S`](lab_jacobian_h4_thumb.S) keeps the earlier local finite-difference diagnostic.
 
 The target is the phone environment we have been using:
 
@@ -74,6 +94,4 @@ The target is the phone environment we have been using:
 - VFPv4 available
 - NEON available, although unnecessary for one pixel
 
-The color-conversion routine takes a packed `0x00RRGGBB` value in a core register and writes three `float32` Lab coordinates to memory. The Jacobian routine writes nine `float32` values, grouped as the R, G, then B derivative columns. The public boundaries remain compatible with the Android soft-float ABI while using VFP scalar instructions internally.
-
-For readability, the first color conversion calls `powf` for the nonlinear sRGB transfer curve and computes the CIELAB cube root with eight Newton steps in Thumb/VFP instructions. Since RGB8 has only 256 possible channel codes, a later optimized version can replace `powf` with a 256-entry linear-light lookup table without changing the source color model.
+The public boundaries remain compatible with the Android soft-float ABI while using VFP scalar instructions internally.
