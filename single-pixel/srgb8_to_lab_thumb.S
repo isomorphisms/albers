@@ -26,6 +26,7 @@
 @ we batch many pixels.
 rgb8_to_lab_thumb:
     push    {r4-r7, lr}
+    sub     sp, sp, #4              @ keep SP 8-byte aligned across BL
     vpush   {d8-d11}                @ preserve s16-s23
 
     mov     r4, r1                  @ output pointer
@@ -122,6 +123,7 @@ rgb8_to_lab_thumb:
     vstr    s19, [r4, #8]
 
     vpop    {d8-d11}
+    add     sp, sp, #4
     pop     {r4-r7, pc}
 
 .size rgb8_to_lab_thumb, .-rgb8_to_lab_thumb
