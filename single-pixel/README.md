@@ -37,14 +37,20 @@ Mapping those six immediate neighbors into CIELAB gives:
 | `B - 1` | `(-0.0091, -0.0428, +0.4789)` | `0.4809` |
 | `B + 1` | `(+0.0093, +0.0437, -0.4827)` | `0.4848` |
 
-A central-difference local map from one RGB code step to Lab is therefore approximately
+For the Jacobian experiment, use a centered radius of **4 RGB codes** rather than 1:
+
+`J[:,i] = (Lab(x + 4 e_i) - Lab(x - 4 e_i)) / 8`.
+
+The denominator is therefore exactly `8`, so its reciprocal `1/8 = 0.125` is exact in binary32. At `#CC6633` this gives approximately
 
 ```text
              dR       dG       dB
  dL*       0.1474   0.2049   0.0092
- da*       0.3959  -0.5137   0.0433
- db*       0.1992   0.2132  -0.4808
+ da*       0.3959  -0.5135   0.0433
+ db*       0.1991   0.2132  -0.4804
 ```
+
+These three probes are along the coordinate axes `(1,0,0)`, `(0,1,0)`, `(0,0,1)`, whose lengths are already 1. Therefore there is no `1/sqrt(2)` normalization in this Jacobian. A diagonal direction such as `(1,1,0)` has length `sqrt(2)` and must carry that normalization when we test it.
 
 This is already more useful than saying that the pixel lives in a generic three-dimensional color ball. At this point the available source moves are discrete, anisotropic after the Lab map, and bounded by the sRGB gamut. Later we can ask what identifications perception introduces, and whether the relevant local neighborhoods change when another color is placed next to this one.
 
@@ -52,7 +58,15 @@ This is already more useful than saying that the pixel lives in a generic three-
 
 ## ARM/Thumb implementation
 
-[`srgb8_to_lab_thumb.S`](srgb8_to_lab_thumb.S) implements the same map for the phone target we have been using:
+The numerical experiment is kept in **assembly rather than Idriç**.
+
+[`srgb8_to_lab_thumb.S`](srgb8_to_lab_thumb.S) implements
+
+`sRGB8 -> linear RGB -> XYZ/D65 -> CIELAB`.
+
+[`lab_jacobian_h4_thumb.S`](lab_jacobian_h4_thumb.S) computes the centered `h=4` Jacobian by calling that conversion at the six required RGB lattice points and multiplying each difference by the exactly represented float32 value `0.125`.
+
+The target is the phone environment we have been using:
 
 - SC9863A device
 - 32-bit `armeabi-v7a` / `armv7l` userland
@@ -60,6 +74,6 @@ This is already more useful than saying that the pixel lives in a generic three-
 - VFPv4 available
 - NEON available, although unnecessary for one pixel
 
-The public routine takes a packed `0x00RRGGBB` value in a core register and writes three `float32` Lab coordinates to memory. That keeps the function boundary compatible with the Android soft-float ABI while still using VFP scalar instructions internally.
+The color-conversion routine takes a packed `0x00RRGGBB` value in a core register and writes three `float32` Lab coordinates to memory. The Jacobian routine writes nine `float32` values, grouped as the R, G, then B derivative columns. The public boundaries remain compatible with the Android soft-float ABI while using VFP scalar instructions internally.
 
-For readability, the first implementation calls `powf` for the nonlinear sRGB transfer curve and computes the CIELAB cube root with eight Newton steps in Thumb/VFP instructions. Since RGB8 has only 256 possible channel codes, a later optimized version can replace `powf` with a 256-entry linear-light lookup table without changing the source color model.
+For readability, the first color conversion calls `powf` for the nonlinear sRGB transfer curve and computes the CIELAB cube root with eight Newton steps in Thumb/VFP instructions. Since RGB8 has only 256 possible channel codes, a later optimized version can replace `powf` with a 256-entry linear-light lookup table without changing the source color model.
