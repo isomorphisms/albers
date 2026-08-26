@@ -30,6 +30,14 @@
 @ needed here.  A later diagonal probe such as (1,1,0) must normalize that
 @ direction explicitly.
 @
+@ Stack/groupoid boundary:
+@ this routine is only local differential data in one chosen presentation,
+@ namely RGB8 coordinates mapped into CIELAB coordinates.  It does not define
+@ perceptual equivalence, quotient colors, equivalence witnesses, stabilizers,
+@ or a stack.  If those become useful, they belong above this routine where
+@ context and the arrows saying why two presentations count as the same are
+@ explicit.  See STACKY-NOTES.md.
+@
 @ Division by 2h = 8 is implemented as multiplication by exactly
 @ representable binary32 1/8 = 0.125.
 @
