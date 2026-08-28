@@ -1,75 +1,131 @@
-# Selected color plates in the 1971 scan
+# Interaction of Color fixture inventory
 
-The 1971 paperbound *Interaction of Color* says it contains the original text with a small selection of color plates. The preface explains that the inexpensive edition keeps only ten color reproductions, including the two covers.
+Do not reduce *Interaction of Color* to one privileged RGB pair. The supplied editions contain several different controlled perceptual experiments, and each should become its own fixture with its own geometry, source edition, sampled regions, and reproduction caveats.
 
-This inventory prevents the two-pixel work from collapsing the whole book onto a single picture. No copyrighted plate images are vendored here; this is a research index into the scan supplied for study.
+No copyrighted plate images are vendored here. This directory records measurements and source descriptions only.
 
-## Front cover — XVII-1
+See also [`EDITION-CROSSCHECK.md`](EDITION-CROSSCHECK.md), [`scan-samples-2006.tsv`](scan-samples-2006.tsv), and the earlier 1971 scan notes.
 
-The cover study uses opaque papers to create an illusion of transparency. Four principal ground colors are combined with six additional opaque shades chosen so that a central shape reads as transparent material even though no transparent material is present.
+## First tier — exact physical equality under changing context
 
-Computational use: multi-region color-mixture/transparency fixture; not a minimal two-color fixture.
+### IV-1 — same ochre strip, two grounds
 
-## Plate XV-2 — scan page 19
+The 2006 revised/expanded plate commentary states that the upper and lower visible ochre areas are portions of the same vertical paper strip. They appear different against large blue and orange grounds.
 
-Nested/intersecting reds. Albers describes three related carmine reds between a central dark red and an outer light pink; the same intermediate reds appear to change toward each neighboring color.
+Computational invariant:
 
-Computational use: contextual deformation along a roughly one-hue family; useful after the basic IV-3 fixtures.
+```text
+target_A_bits == target_B_bits
+context_A_bits != context_B_bits
+```
 
-## Plate IV-3, grid study — scan page 20
+The 2006 scan samples the two target appearances differently; keep those as two alternative source variants and duplicate whichever target variant is selected exactly across both synthetic contexts.
 
-The first of the two IV-3 reproductions. Repeated colors are embedded in contrasting grid/field geometry so that identical physical color areas read differently.
+### IV-3 — same color on strongly different grounds
 
-Computational use: direct contextual-color fixture with repeated samples and nontrivial area/recurrence geometry. This should be sampled independently.
+The 1971 selected-plates edition contains both a grill/field study and a small-rectangle study. In the rectangle version, Albers says the two central colors are physically the same although they look different.
 
-## Plate IV-3, rectangle study — scan page 21
+Computational use: second same-target fixture with different geometry and a separate reproduction path from IV-1.
 
-Two small dark rectangles lie on large yellow and blue grounds. Albers explicitly states that the two central colors are the same physical color although they look different.
+### IV-4 — factually alike inner violets
 
-Computational use: cleanest initial contextual fixture. In a synthetic reconstruction the target RGB bits must be identical. The scan's failure to reproduce the two rectangles identically is reproduction evidence, not a reason to average them.
+The recoverable 50th-anniversary commentary says the smaller inner violets are factually alike while one appears to refer toward the surrounding lighter violet.
 
-## Plate XXIII-2 — scan page 22
+Computational use: same-color invariant within a much narrower hue family.
 
-Grey-violet / grey-green equal-light-intensity study. Albers says the original screen-print version demonstrated how equal light intensity can make a boundary effectively vanish and warns that the cheaper reproduction does not preserve the effect reliably.
+### VI-3 — same X color, reciprocal grounds
 
-Computational use: later equal-lightness / boundary-visibility fixture; particularly valuable as a case where the reproduction itself is explicitly known to be inadequate.
+The 2006 commentary says both X forms are the same color. On a yellow ground the X reads violetish; on a violet-grey ground it reads yellowish. Their physical connection is included to reveal their identity.
 
-## Plate XI-3 — scan page 23
+Computational use: excellent same-target fixture with long thin geometry instead of small blocks.
 
-A yellow horizontal grid crosses green, violet, and red vertical bars. The crossing regions are chosen to read as mixtures and to produce changing front/behind spatial readings.
+### VI-4 — same center color on brown/violet grounds
 
-Computational use: multi-color mixture, boundary, and depth-order fixture.
+The recoverable 50th-anniversary commentary describes center squares that appear as exchanged brown/violet grounds but are precisely alike.
 
-## Plate VIII-2 — scan pages 24-25
+Computational use: another direct same-target/different-ground oracle once a usable plate image is obtained.
 
-After-image demonstration: yellow circles on white in a black field and a corresponding empty white field. The exercise depends on fixation and then moving gaze, not merely static juxtaposition.
+## Second tier — physically different colors made perceptually similar
 
-Computational use: temporal/perceptual protocol fixture rather than a static RGB-pair fixture.
+### VII-2 — subtraction of color
 
-## Plate XVIII-1 — scan page 26
+The 50th-anniversary commentary introduces the inverse problem: two physically different colors are to look alike.
 
-A free-study example. Unlike the obligatory laboratory exercises, free studies are intended to explore color relatedness without one prescribed effect.
+Computational invariant:
 
-Computational use: less suitable as an oracle; useful later as an unconstrained stress case.
+```text
+target_A_bits != target_B_bits
+perceived_A ~= perceived_B
+```
 
-## Back cover — Goethe color triangle, scan page 108
+Do not erase the physical distinction in the source pixels.
 
-A reproduction of Goethe's color triangle and its subdivisions.
+### VII-4 — centers on deep green and light grey
 
-Computational use: historical color-system reference, not an interaction oracle.
+The recoverable commentary describes small central rectangles that seem alike under strongly different grounds.
 
-## Fixture order
+### VII-5 — Naples yellow and ochre
 
-For computational work, use the book in roughly this order:
+Naples yellow and ochre are explicitly described as physically different colors whose contrast can be transformed by reversed grounds until they look similar or alike.
 
-1. IV-3 rectangle — same target, two grounds;
-2. IV-3 grid — same/repeated colors under different area and recurrence geometry;
-3. XV-2 — intermediate reds changed by both neighbors;
-4. XXIII-2 — equal-light-intensity / disappearing boundary;
-5. XI-3 — illusionary mixtures and spatial ordering;
-6. XVII-1 cover — more complicated fake transparency;
-7. VIII-2 — temporal after-image protocol;
-8. XVIII-1 — free-study stress case;
-9. Goethe triangle — historical/system reference.
+### VII-7 — very light grey versus almost black-grey
 
-The point is not to find one privileged RGB pair. The scan gives several distinct experiments, and each should become a separate fixture with its own source page, geometry, sampled regions, and reproduction caveats.
+A deliberately extreme solution: a very light grey and a dark almost-black grey are made to appear alike under suitable contexts.
+
+Computational use: severe stress test for any contextual model.
+
+## Third tier — structured multi-color effects
+
+### XIII-2 — Bezold / after-image stripe study
+
+The 2006 commentary compares the dark red flanking black with **the same red** accompanying white. This gives another exact-same-color fixture, now in repeated stripe geometry. The scan-derived measurements are in `scan-samples-2006.tsv`.
+
+### XV-2 — intersecting reds / fluting
+
+A one-hue family runs from pale pink through several related reds to a central dark red. The same intermediate bands read differently toward their neighboring colors, creating the fluting effect.
+
+Computational use: contextual deformation along an ordered hue/lightness family rather than a binary pair.
+
+### XVII-1 — false transparency from opaque colors
+
+Four base colors plus additional opaque patches are chosen so that the added regions read as a nearly transparent sheet, with doubled overlap on the right.
+
+Computational use: multi-region illusion of transparency. Preserve all regions; do not reduce it to independent pairs.
+
+### XI-3 — crossing colors / mixture and depth
+
+The 1971 scan uses a yellow horizontal grid crossing green, violet, and red vertical bars. Crossing regions are chosen to read as mixtures and change front/behind spatial interpretation.
+
+Computational use: mixture, boundary, and depth-order fixture.
+
+### XXIII-2 — equal-light-intensity / vanishing boundary
+
+Albers explicitly warns that the inexpensive photomechanical reproduction does not preserve this delicate effect reliably. The original screen print demonstrated that equal light intensity could make the boundary nearly disappear.
+
+Computational use: important negative-control lesson as well as a later boundary-visibility fixture. Do not calibrate an oracle from a reproduction that Albers himself says is inadequate.
+
+### VIII-2 — after-image protocol
+
+Yellow circles on white against black plus a corresponding empty white field. This depends on fixation followed by a gaze shift.
+
+Computational use: temporal perceptual protocol, not a static RGB-pair fixture.
+
+## Historical / less constrained material
+
+- XVIII-1 — free-study example; useful as a later stress case, not a clean oracle.
+- Goethe color triangle — historical color-system reference, not an interaction oracle.
+
+## Suggested implementation order
+
+1. IV-1 — same strip, blue versus orange ground;
+2. VI-3 — same X, violet-grey versus yellow ground;
+3. IV-3 rectangle — same target, yellow versus blue ground;
+4. XIII-2 — same dark red with black versus white;
+5. IV-3 grill — recurrence/area geometry;
+6. VII-5 and VII-7 — physically different targets made perceptually alike;
+7. XV-2 — one-hue contextual deformation family;
+8. XXIII-2 — equal-lightness boundary experiment, with reproduction caveat;
+9. XI-3 and XVII-1 — multi-region mixture/transparency;
+10. VIII-2 — temporal after-image protocol.
+
+The source book gives a family of experiments. The computational repository should preserve that family rather than searching for a single canonical color pair.
