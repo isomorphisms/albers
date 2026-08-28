@@ -1,6 +1,5 @@
 role	r	g	b	hex	use
 upper_ground	230	193	60	#E6C13C	fixture_context_yellow
 lower_ground	96	122	173	#607AAD	fixture_context_blue
-upper_target_scan	102	81	54	#665136	reproduction_sample_only
-lower_target_scan	120	94	59	#785E3B	reproduction_sample_only
-normalized_target	111	88	57	#6F5839	fixture_target_identical_in_both_contexts
+upper_target_scan	102	81	54	#665136	canonical_target_variant_upper
+lower_target_scan	120	94	59	#785E3B	canonical_target_variant_lower
