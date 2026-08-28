@@ -1,0 +1,29 @@
+plate	role	r	g	b	hex	note
+IV-1	top_ground_blue	77	131	168	#4D83A8	large upper ground
+IV-1	top_target_scan	188	123	56	#BC7B38	upper visible part of the ochre strip; same physical paper as lower target according to plate commentary
+IV-1	dark_blue_flap	24	43	102	#182B66	horizontal flap band
+IV-1	yellow_flap	243	226	66	#F3E242	horizontal flap band
+IV-1	bottom_target_scan	193	118	61	#C1763D	lower visible part of the same ochre strip; retain scan mismatch rather than averaging
+IV-1	bottom_ground_orange	236	136	44	#EC882C	large lower ground
+VI-3	top_ground_violet_grey	179	166	169	#B3A6A9	upper ground
+VI-3	top_x_scan	197	187	144	#C5BB90	upper X; commentary says both X forms are one and the same physical color
+VI-3	bottom_ground_yellow	239	228	107	#EFE46B	lower ground
+VI-3	bottom_x_scan	207	190	132	#CFBE84	lower X; retain scan mismatch rather than averaging
+XIII-2	left_dark_red_scan	163	46	45	#A32E2D	dark red adjacent to black
+XIII-2	left_black	21	20	20	#151414	black context
+XIII-2	right_dark_red_scan	173	51	49	#AD3331	same red accompanying white according to commentary; retain scan mismatch
+XIII-2	right_white	241	237	241	#F1EDF1	white context
+XV-2	band_1_light_pink	239	181	182	#EFB5B6	outer light band
+XV-2	band_2	232	121	111	#E8796F	second band
+XV-2	band_3	222	106	86	#DE6A56	third band
+XV-2	band_4	214	86	56	#D65638	fourth band
+XV-2	band_5	206	64	39	#CE4027	fifth band
+XV-2	center_dark_red	164	41	20	#A42914	central ground plane
+XVII-1	base_green	45	79	59	#2D4F3B	upper-left base color
+XVII-1	base_orange	213	79	25	#D54F19	upper-right base color
+XVII-1	base_red	208	63	46	#D03F2E	lower-left base color
+XVII-1	base_yellow	229	212	0	#E5D400	lower-right base color
+XVII-1	overlay_green_dark	28	55	48	#1C3730	opaque patch chosen to read as film over green
+XVII-1	overlay_red_muted	180	73	60	#B4493C	opaque patch chosen to read as film over red
+XVII-1	overlay_orange_dark	174	69	21	#AE4515	opaque patch chosen to read as film over orange
+XVII-1	overlay_yellow_dark	223	207	0	#DFCF00	opaque patch chosen to read as film over yellow
