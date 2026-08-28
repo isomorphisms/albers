@@ -65,6 +65,7 @@ data BookEdition = BookEdition
   , editionPublisher :: !String
   , editionYear      :: !Int
   , editionPrinting  :: !(Maybe String)
+  , printingYear     :: !(Maybe Int)
   } deriving (Eq, Show)
 
 data PlateEvidence = PlateEvidence
