@@ -1,8 +1,10 @@
 module Albers.Plate
   ( Mm(..)
   , RGB8(..)
+  , PointMM(..)
   , RectMM(..)
-  , ColorRect(..)
+  , ShapeMM(..)
+  , ColorLayer(..)
   , BookEdition(..)
   , PlateEvidence(..)
   , PlateSpec(..)
@@ -12,7 +14,16 @@ module Albers.Plate
   , writePlatePpm
   ) where
 
-import Codec.Picture (Image, PixelRGB8(..), generateImage, imageHeight, imageWidth, pixelAt, savePngImage, DynamicImage(..))
+import Codec.Picture
+  ( DynamicImage(..)
+  , Image
+  , PixelRGB8(..)
+  , generateImage
+  , imageHeight
+  , imageWidth
+  , pixelAt
+  , savePngImage
+  )
 import Data.ByteString.Builder (Builder, string8, toLazyByteString, word8)
 import qualified Data.ByteString.Lazy as BL
 import Data.List (find)
@@ -27,6 +38,11 @@ data RGB8 = RGB8
   , blue8  :: !Word8
   } deriving (Eq, Show)
 
+data PointMM = PointMM
+  { pointX :: !Mm
+  , pointY :: !Mm
+  } deriving (Eq, Show)
+
 data RectMM = RectMM
   { rectX :: !Mm
   , rectY :: !Mm
@@ -34,9 +50,14 @@ data RectMM = RectMM
   , rectH :: !Mm
   } deriving (Eq, Show)
 
-data ColorRect = ColorRect
-  { colorRectBounds :: !RectMM
-  , colorRectRGB    :: !RGB8
+data ShapeMM
+  = Rectangle !RectMM
+  | Polygon ![PointMM]
+  deriving (Eq, Show)
+
+data ColorLayer = ColorLayer
+  { layerShape :: !ShapeMM
+  , layerRGB   :: !RGB8
   } deriving (Eq, Show)
 
 data BookEdition = BookEdition
@@ -47,27 +68,28 @@ data BookEdition = BookEdition
   } deriving (Eq, Show)
 
 data PlateEvidence = PlateEvidence
-  { plateLabel         :: !String
-  , sourcePage         :: !(Maybe Int)
-  , commentaryNote     :: !String
-  , rgbMeasurementNote :: !String
-  , geometryNote       :: !String
+  { plateLabel          :: !String
+  , reproductionPdfPage :: !(Maybe Int)
+  , commentaryPdfPages  :: ![Int]
+  , commentaryNote      :: !String
+  , rgbMeasurementNote  :: !String
+  , geometryNote        :: !String
   } deriving (Eq, Show)
 
 data PlateSpec = PlateSpec
-  { plateEdition    :: !BookEdition
-  , plateEvidence   :: !PlateEvidence
-  , pageWidthMM     :: !Mm
-  , pageHeightMM    :: !Mm
-  , pageBackground  :: !RGB8
-  , plateLayers     :: ![ColorRect]
+  { plateEdition   :: !BookEdition
+  , plateEvidence  :: !PlateEvidence
+  , pageWidthMM    :: !Mm
+  , pageHeightMM   :: !Mm
+  , pageBackground :: !RGB8
+  , plateLayers    :: ![ColorLayer]
   } deriving (Eq, Show)
 
 mmToPixels :: Int -> Mm -> Int
 mmToPixels dpi (Mm mm)
-  | dpi <= 0   = error "dpi must be positive"
-  | mm < 0     = error "physical size must be non-negative"
-  | otherwise  = round (mm * fromIntegral dpi / 25.4)
+  | dpi <= 0  = error "dpi must be positive"
+  | mm < 0    = error "physical size must be non-negative"
+  | otherwise = round (mm * fromIntegral dpi / 25.4)
 
 renderPlate :: Int -> PlateSpec -> Image PixelRGB8
 renderPlate dpi spec = generateImage renderPixel widthPx heightPx
@@ -76,12 +98,12 @@ renderPlate dpi spec = generateImage renderPixel widthPx heightPx
     heightPx = max 1 (mmToPixels dpi (pageHeightMM spec))
 
     renderPixel x y =
-      case find (containsMM xMM yMM . colorRectBounds) (reverse (plateLayers spec)) of
-        Just layer -> toPixel (colorRectRGB layer)
+      case find (containsShape xMM yMM . layerShape) (reverse (plateLayers spec)) of
+        Just layer -> toPixel (layerRGB layer)
         Nothing    -> toPixel (pageBackground spec)
       where
-        -- Sampling pixel centers makes the physical geometry primary; the
-        -- raster resolution is only a rendering choice.
+        -- Pixel centers are converted back to physical coordinates.  DPI
+        -- therefore chooses raster resolution without redefining geometry.
         xMM = pixelCenterMM dpi x
         yMM = pixelCenterMM dpi y
 
@@ -118,9 +140,25 @@ pixelCenterMM :: Int -> Int -> Double
 pixelCenterMM dpi pixel =
   (fromIntegral pixel + 0.5) * 25.4 / fromIntegral dpi
 
-containsMM :: Double -> Double -> RectMM -> Bool
-containsMM x y (RectMM (Mm rx) (Mm ry) (Mm rw) (Mm rh)) =
+containsShape :: Double -> Double -> ShapeMM -> Bool
+containsShape x y (Rectangle rect) = containsRect x y rect
+containsShape x y (Polygon points) = pointInPolygon x y points
+
+containsRect :: Double -> Double -> RectMM -> Bool
+containsRect x y (RectMM (Mm rx) (Mm ry) (Mm rw) (Mm rh)) =
   x >= rx && x < rx + rw && y >= ry && y < ry + rh
+
+pointInPolygon :: Double -> Double -> [PointMM] -> Bool
+pointInPolygon _ _ [] = False
+pointInPolygon _ _ [_] = False
+pointInPolygon _ _ [_, _] = False
+pointInPolygon x y points = odd (length (filter id (map crosses edges)))
+  where
+    edges = zip points (tail points ++ [head points])
+
+    crosses (PointMM (Mm x1) (Mm y1), PointMM (Mm x2) (Mm y2)) =
+      ((y1 > y) /= (y2 > y))
+      && x < x1 + (x2 - x1) * (y - y1) / (y2 - y1)
 
 toPixel :: RGB8 -> PixelRGB8
 toPixel (RGB8 r g b) = PixelRGB8 r g b
