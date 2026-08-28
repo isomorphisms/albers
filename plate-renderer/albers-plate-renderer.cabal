@@ -4,7 +4,9 @@ version:            0.1.0.0
 build-type:         Simple
 
 library
-  exposed-modules:    Albers.Plate
+  exposed-modules:
+      Albers.Plate
+      Albers.PlateData
   hs-source-dirs:      src
   build-depends:
       base >=4.14 && <5,
