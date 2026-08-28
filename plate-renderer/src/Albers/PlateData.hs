@@ -1,17 +1,18 @@
 module Albers.PlateData
-  ( yale1971FourthPrinting
-  , xv2Yale1971Scan
+  ( yalePaperbound1971FourthPrinting1972
+  , xv2YaleFourthPrinting1972Scan
   ) where
 
 import Albers.Plate
 
-yale1971FourthPrinting :: BookEdition
-yale1971FourthPrinting =
+yalePaperbound1971FourthPrinting1972 :: BookEdition
+yalePaperbound1971FourthPrinting1972 =
   BookEdition
     { editionLabel = "Interaction of Color: text of the original edition with selected plates"
     , editionPublisher = "Yale University Press"
     , editionYear = 1971
     , editionPrinting = Just "Fourth printing"
+    , printingYear = Just 1972
     }
 
 -- | First measured plate record.
@@ -26,10 +27,10 @@ yale1971FourthPrinting =
 -- nested forms are approximated by four-vertex polygons.  This preserves the
 -- plate's proportions while keeping scan evidence distinct from claims about
 -- the physical trim size of every edition.
-xv2Yale1971Scan :: PlateSpec
-xv2Yale1971Scan =
+xv2YaleFourthPrinting1972Scan :: PlateSpec
+xv2YaleFourthPrinting1972Scan =
   PlateSpec
-    { plateEdition = yale1971FourthPrinting
+    { plateEdition = yalePaperbound1971FourthPrinting1972
     , plateEvidence =
         PlateEvidence
           { plateLabel = "XV-2"
