@@ -2,6 +2,12 @@
 
 This directory collects research notes on **Peter T. Donahue**, who publishes as **Color Nerd** on YouTube and other platforms.
 
+## Per-video archive
+
+The exhaustive source-by-source pass now lives in [`../color-nerd/`](../color-nerd/). That directory is organized one video at a time and is intended to preserve every substantive claim, demonstration, example, distinction, historical attribution, named source, and practical recommendation that can be recovered.
+
+This `color-theory-nerd/` directory remains the **synthesis layer**: material is grouped by subject so it can connect efficiently to Albers, perception science, pigment mixing, historical color systems, and computational experiments without losing the per-video provenance.
+
 ## Identification
 
 I am confident this is the person intended by the original description:
@@ -35,6 +41,6 @@ That combination — Peter, teacher/lecturer, painter, perception, and hands-on 
 
 ## Scope and method
 
-This is a **curated research index, not yet an exhaustive scrape of every upload** on the channel. It emphasizes videos for which a title, URL, description, transcript-derived notes, or another reliable source could be checked. Summaries here are paraphrases, not copied transcripts.
+The synthesis files here are **not intended to substitute for the per-video archive**. They emphasize material for which a title, URL, description, transcript-derived note, first-party companion, or another reliable source could be checked. Summaries are paraphrases, not copied transcripts.
 
 Some of Donahue's short videos intentionally use simplified models to make a perceptual point. Where a claim is better treated as a teaching model than as a complete scientific statement, these notes say so. The aim is to preserve both what Donahue is trying to teach and the distinction between pedagogy, historical argument, and formal color science.
