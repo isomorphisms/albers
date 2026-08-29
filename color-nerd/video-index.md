@@ -10,14 +10,15 @@ This index is the migration queue from the existing topic syntheses into one-fil
 |---|---|---|---|
 | `IlpD9DXiH-c` | How Chroma and Saturation Are Different | substantial synthesis | missing |
 | `xhYNtMvWbZ4` | Saturation vs. Chroma — interactive companion | substantial + first-party companion | [`videos/xhYNtMvWbZ4.md`](videos/xhYNtMvWbZ4.md) |
-| `5qbtjJe1V2o` | How Are Lightness and Brightness Different? | substantial synthesis | missing |
-| `WQYLfwa2lAI` | Is Green WARM or COOL? | substantial synthesis | missing |
-| `XmQ9O4efPrQ` | Warm / Cool Colors — Color Temperature Is Not Just Hue | substantial synthesis | missing |
+| `5qbtjJe1V2o` | How Are Lightness and Brightness Different? | transcript-derived | [`videos/5qbtjJe1V2o.md`](videos/5qbtjJe1V2o.md) |
+| `u_tQ4UkIPfU` | How Our Eyes Turn Light into Color | transcript-derived; newly recovered | [`videos/u_tQ4UkIPfU.md`](videos/u_tQ4UkIPfU.md) |
+| `WQYLfwa2lAI` | Is Green WARM or COOL? | transcript-derived | [`videos/WQYLfwa2lAI.md`](videos/WQYLfwa2lAI.md) |
+| `XmQ9O4efPrQ` | Warm / Cool Colors — Color Temperature Is Not Just Hue | transcript-derived | [`videos/XmQ9O4efPrQ.md`](videos/XmQ9O4efPrQ.md) |
 | `M3py_iSpuyA` | Color Temperature = Spectral Bias | substantial synthesis | missing |
-| `q6l2-l9e50o` | Magical Color Theory — RGB Shadows | substantial synthesis | missing |
+| `q6l2-l9e50o` | Magical Color Theory — RGB Shadows | transcript-derived | [`videos/q6l2-l9e50o.md`](videos/q6l2-l9e50o.md) |
 | `hCGv73cA0yA` | Iridescence Is Crazy | substantial synthesis | missing |
 | `PJUFzgmtOBI` | Iridescent Color Math | substantial synthesis | missing |
-| `MLG5jjPUwTA` | Newly Discovered Color — Olo | substantial synthesis | missing |
+| `MLG5jjPUwTA` | Newly Discovered Color — Olo | transcript-derived | [`videos/MLG5jjPUwTA.md`](videos/MLG5jjPUwTA.md) |
 | `RVPEXrHOiOI` | Birds See Different Complementary Colors Than Us! | substantial synthesis | missing |
 | `_Uq1vb5UtoM` | Bird Hue Circuits & Tetrahedra | substantial synthesis | missing |
 | `49k6jJOH3Pc` | Gerritsen's Spectral Perception Wheel | substantial synthesis | missing |
@@ -27,8 +28,8 @@ This index is the migration queue from the existing topic syntheses into one-fil
 
 | ID | Working title | Current source coverage | Per-video file |
 |---|---|---|---|
-| `7dXXlyi__tA` | Everything TikTok Taught Me About Color Theory | substantial long-form note | missing |
-| `jLSCbbID1ck` | Things to Know about Mixing Paint | substantial long-form note | missing |
+| `7dXXlyi__tA` | Everything TikTok Taught Me About Color Theory | transcript-derived long-form structure | [`videos/7dXXlyi__tA.md`](videos/7dXXlyi__tA.md) |
+| `jLSCbbID1ck` | Things to Know about Mixing Paint | transcript-derived long-form structure | [`videos/jLSCbbID1ck.md`](videos/jLSCbbID1ck.md) |
 | `alrdClpGHvY` | HOW TO USE MY SCIENCE-BASED COLOR WHEEL | substantial topic note | missing |
 | `_wRA-XvgFKo` | Warm Light, Cool Shadow... Or Vice Versa? | catalog/substantial topic note | missing |
 | `Flkao2Xa7OI` | Choosing Colors with Confidence | catalog/substantial topic note | missing |
@@ -39,7 +40,7 @@ This index is the migration queue from the existing topic syntheses into one-fil
 
 | ID | Working title | Current source coverage | Per-video file |
 |---|---|---|---|
-| `lXDCQjeM8Hk` | You're Wrong about Color Harmony | substantial long-form note | missing |
+| `lXDCQjeM8Hk` | You're Wrong about Color Harmony | transcript-derived long-form structure | [`videos/lXDCQjeM8Hk.md`](videos/lXDCQjeM8Hk.md) |
 | `sb60nHQ--fI` | Wojciech Fangor, Color-Aid, and the legacy of Josef Albers | catalog; transcript explicitly needed | missing |
 
 ## Color wheels / historical systems
