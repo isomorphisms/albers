@@ -4,11 +4,13 @@ Channel: https://www.youtube.com/@ColorNerd1
 
 This index is the migration queue from the existing topic syntheses into one-file-per-video notes. It is **not yet a claim that every upload on the channel has been discovered**. The target is full channel coverage.
 
+Current per-video archive: **20 notes**.
+
 ## Perception / color science
 
 | ID | Working title | Current source coverage | Per-video file |
 |---|---|---|---|
-| `IlpD9DXiH-c` | How Chroma and Saturation Are Different | substantial synthesis | missing |
+| `IlpD9DXiH-c` | How Chroma and Saturation Are Different | transcript-derived | [`videos/IlpD9DXiH-c.md`](videos/IlpD9DXiH-c.md) |
 | `xhYNtMvWbZ4` | Saturation vs. Chroma — interactive companion | substantial + first-party companion | [`videos/xhYNtMvWbZ4.md`](videos/xhYNtMvWbZ4.md) |
 | `5qbtjJe1V2o` | How Are Lightness and Brightness Different? | transcript-derived | [`videos/5qbtjJe1V2o.md`](videos/5qbtjJe1V2o.md) |
 | `u_tQ4UkIPfU` | How Our Eyes Turn Light into Color | transcript-derived; newly recovered | [`videos/u_tQ4UkIPfU.md`](videos/u_tQ4UkIPfU.md) |
@@ -16,12 +18,12 @@ This index is the migration queue from the existing topic syntheses into one-fil
 | `XmQ9O4efPrQ` | Warm / Cool Colors — Color Temperature Is Not Just Hue | transcript-derived | [`videos/XmQ9O4efPrQ.md`](videos/XmQ9O4efPrQ.md) |
 | `M3py_iSpuyA` | Color Temperature = Spectral Bias | substantial synthesis | missing |
 | `q6l2-l9e50o` | Magical Color Theory — RGB Shadows | transcript-derived | [`videos/q6l2-l9e50o.md`](videos/q6l2-l9e50o.md) |
-| `hCGv73cA0yA` | Iridescence Is Crazy | substantial synthesis | missing |
+| `hCGv73cA0yA` | Iridescence Is Crazy | transcript-derived | [`videos/hCGv73cA0yA.md`](videos/hCGv73cA0yA.md) |
 | `PJUFzgmtOBI` | Iridescent Color Math | substantial synthesis | missing |
 | `MLG5jjPUwTA` | Newly Discovered Color — Olo | transcript-derived | [`videos/MLG5jjPUwTA.md`](videos/MLG5jjPUwTA.md) |
-| `RVPEXrHOiOI` | Birds See Different Complementary Colors Than Us! | substantial synthesis | missing |
-| `_Uq1vb5UtoM` | Bird Hue Circuits & Tetrahedra | substantial synthesis | missing |
-| `49k6jJOH3Pc` | Gerritsen's Spectral Perception Wheel | substantial synthesis | missing |
+| `RVPEXrHOiOI` | Birds See Different Complementary Colors Than Us! | transcript-derived; teaching-model caveat | [`videos/RVPEXrHOiOI.md`](videos/RVPEXrHOiOI.md) |
+| `_Uq1vb5UtoM` | Bird Hue Circuits & Tetrahedra | transcript-derived; teaching-model caveat | [`videos/_Uq1vb5UtoM.md`](videos/_Uq1vb5UtoM.md) |
+| `49k6jJOH3Pc` | Gerritsen's Spectral Perception Wheel | transcript-derived | [`videos/49k6jJOH3Pc.md`](videos/49k6jJOH3Pc.md) |
 | `z9UpreD-t6k` | The HELMHOLTZ-KOHLRAUSCH EFFECT! | catalog/substantial topic note | missing |
 
 ## Pigment mixing / painting / palette practice
@@ -32,7 +34,7 @@ This index is the migration queue from the existing topic syntheses into one-fil
 | `jLSCbbID1ck` | Things to Know about Mixing Paint | transcript-derived long-form structure | [`videos/jLSCbbID1ck.md`](videos/jLSCbbID1ck.md) |
 | `alrdClpGHvY` | HOW TO USE MY SCIENCE-BASED COLOR WHEEL | substantial topic note | missing |
 | `_wRA-XvgFKo` | Warm Light, Cool Shadow... Or Vice Versa? | catalog/substantial topic note | missing |
-| `Flkao2Xa7OI` | Choosing Colors with Confidence | catalog/substantial topic note | missing |
+| `Flkao2Xa7OI` | Choosing Colors with Confidence | transcript-derived structured note | [`videos/Flkao2Xa7OI.md`](videos/Flkao2Xa7OI.md) |
 | `bT7NNuENBOQ` | The Real Reason Your Palette Has Two of Every Color | catalog/substantial topic note | missing |
 | `RezeYJFTacs` | Caravaggio's copper-resinate greens | substantial historical/material note | missing |
 
@@ -56,11 +58,11 @@ This index is the migration queue from the existing topic syntheses into one-fil
 | `bAIWcrBN6CY` | I Blame this 1769 Color Wheel for Centuries of Bad Color Theory | substantial note | missing |
 | `PJ1xXwr3gtE` | Color Wheel? Nah. Color Pentagon! | catalog/substantial topic note | missing |
 | `O-n5WeurF3s` | The Fascinating Color Wheel of Christine Holbrook | catalog/substantial topic note | missing |
-| `_3-s2gM9MIM` | Color Wheel Wednesday ep. 1 — Ostwald hue circle | substantial note | missing |
+| `_3-s2gM9MIM` | Color Wheel Wednesday ep. 1 — Ostwald hue circle | transcript-derived | [`videos/_3-s2gM9MIM.md`](videos/_3-s2gM9MIM.md) |
 | `BJx_7QkhnVA` | Color Wheel Wednesday ep. 5 — The Color Wheel that Never Had a Chance | substantial note | missing |
-| `LfgswanxffM` | RYB vs. CMY Color Wheels | substantial note | missing |
-| `uwauAiE51ss` | Amy Sawyer — forgotten CMY theorist | substantial note | missing |
-| `Xo4VcaEikB0` | Oldest color wheel with “magenta” | substantial note | missing |
+| `LfgswanxffM` | RYB vs. CMY Color Wheels | transcript-derived | [`videos/LfgswanxffM.md`](videos/LfgswanxffM.md) |
+| `uwauAiE51ss` | Amy Sawyer — forgotten CMY theorist | transcript-derived | [`videos/uwauAiE51ss.md`](videos/uwauAiE51ss.md) |
+| `Xo4VcaEikB0` | Oldest color wheel with “magenta” | transcript-derived | [`videos/Xo4VcaEikB0.md`](videos/Xo4VcaEikB0.md) |
 | `Sv2lUbd8gZ8` | Elizabeth Hoppin Lewis, 1931 | substantial note | missing |
 | `HNlFFJowKRk` | Cheskin Color Wheel, 1953 | substantial note | missing |
 | `bg_5p6oTaUU` | What Happened to Indigo? | substantial note | missing |
